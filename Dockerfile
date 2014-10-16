@@ -4,10 +4,27 @@
 FROM debian:wheezy
 
 # Add treasure data repository to apt and install
-RUN apt-get update && \
-    apt-get install -y adduser curl && \
-    curl http://packages.treasuredata.com/GPG-KEY-td-agent | apt-key add - && \
+ADD http://packages.treasuredata.com/GPG-KEY-td-agent /tmp/
+RUN apt-key add /tmp/GPG-KEY-td-agent && \
+    apt-get update && \
     echo "deb http://packages.treasuredata.com/2/debian/wheezy/ wheezy contrib" > /etc/apt/sources.list.d/treasure-data.list && \
     apt-get update && \
-    apt-get install -y --force-yes td-agent && \
+    apt-get install -y --force-yes adduser td-agent && \
     rm -rf /var/lib/apt/lists/*
+
+# Use jemalloc to avoid memory fragmentation
+ENV LD_PRELOAD /opt/td-agent/embedded/lib/libjemalloc.so
+
+# Set Max number of file descriptors for the safety sake
+# see http://docs.fluentd.org/en/articles/before-install
+RUN ulimit -n 65536
+
+# Install plugins
+RUN td-agent-gem install \
+    fluent-plugin-s3 \
+    fluent-plugin-dynamodb \
+    fluent-plugin-loggly \
+    fluent-plugin-tail-multiline
+
+# We do NOT run as daemon
+CMD ["/usr/sbin/td-agent"]
