@@ -26,5 +26,8 @@ RUN td-agent-gem install \
     fluent-plugin-loggly \
     fluent-plugin-tail-multiline
 
+# Custom plugins
+ADD plugins/in_tail_extender.rb /etc/td-agent/plugin/
+
 # We do NOT run as daemon
 CMD ["/usr/sbin/td-agent"]
