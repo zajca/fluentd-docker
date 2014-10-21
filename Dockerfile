@@ -33,7 +33,8 @@ RUN td-agent-gem install \
     fluent-plugin-s3 \
     fluent-plugin-dynamodb \
     fluent-plugin-loggly \
-    fluent-plugin-tail-multiline
+    fluent-plugin-tail-multiline \
+    fluent-plugin-rewrite-tag-filter
 
 # Custom plugins
 ADD plugins/in_tail_extender.rb /etc/td-agent/plugin/
