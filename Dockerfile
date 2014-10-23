@@ -35,10 +35,8 @@ RUN td-agent-gem install \
     fluent-plugin-loggly \
     fluent-plugin-tail-multiline \
     fluent-plugin-rewrite-tag-filter \
-    fluent-plugin-parser
-
-# Custom plugins
-ADD plugins/in_tail_extender.rb /etc/td-agent/plugin/
+    fluent-plugin-parser \
+    fluent-plugin-record-reformer
 
 ADD ./docker-entrypoint.sh /
 ENTRYPOINT ["/docker-entrypoint.sh"]
