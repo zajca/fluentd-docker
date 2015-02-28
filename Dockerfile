@@ -36,7 +36,9 @@ RUN td-agent-gem install \
     fluent-plugin-parser \
     fluent-plugin-record-reformer \
     fluent-plugin-mongo-slow-query \
-    install fluent-plugin-docker-format
+    fluent-plugin-docker-format \
+    fluent-plugin-mysqlslowquery
+    
 
 ADD ./docker-entrypoint.sh /
 ENTRYPOINT ["/docker-entrypoint.sh"]
