@@ -30,8 +30,7 @@ RUN ulimit -n 65536
 
 # Install plugins
 RUN td-agent-gem install \
-    fluent-plugin-s3 \
-    fluent-plugin-dynamodb \
+    fluent-plugin-influxdb \
     fluent-plugin-loggly \
     fluent-plugin-tail-multiline \
     fluent-plugin-rewrite-tag-filter \
