@@ -33,7 +33,6 @@ RUN td-agent-gem install \
     fluent-plugin-influxdb \
     fluent-plugin-loggly \
     fluent-plugin-tail-multiline \
-    fluent-plugin-rewrite-tag-filter \
     fluent-plugin-parser \
     fluent-plugin-record-reformer
 
